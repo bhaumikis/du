@@ -1,0 +1,42 @@
+@charset "utf-8";
+
+
+/*--------------------------------------------------------------------------*/
+html {
+	padding:0;
+	margin:0;
+	border:0;
+	background:#fff;
+}
+body {
+	padding:0;
+	margin:0;
+	border:0;background:#fff;
+}
+#content {
+	display:block;
+	position:relative;
+	z-index:3;
+	word-wrap:break-word;
+}
+
+#printhead {
+	height:182px;
+	background:#fff;
+/*	font-size:24pt;*/
+	color:#000;
+/*	border-bottom:1px solid #000;
+*/}
+#printfoot {
+	height:275px;
+	background:#fff;
+	color:#000;
+	text-align:right;
+	margin-top:0px;
+}
+#foot {
+	display:none;
+}
+
+
+
