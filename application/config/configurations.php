@@ -14,7 +14,7 @@ define("VERSION", "1.1");
 
 define("PROTOCOL", ((isset($_SERVER["HTTPS"]) and strtolower($_SERVER["HTTPS"]) == "on") ? "https" : "http"));
 define("DOMAIN_NAME", $_SERVER['HTTP_HOST']);
-define("PROJECT_ROOT", "du");
+define("PROJECT_ROOT", "dujen");
 
 define("APPLICATION_URL", PROTOCOL . "://" . DOMAIN_NAME . ((strlen(PROJECT_ROOT)) ? "/" . PROJECT_ROOT : ""));
 define("APPLICATION_PATH", dirname(dirname(dirname(__FILE__))));
