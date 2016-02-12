@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="DUjen Test Suite" tests="1" assertions="2" failures="0" errors="0" time="1.733768">
+    <testsuite name="Infostretch\GuzzleHttp\UserTest" file="C:\xampp\htdocs\duphpunit\tests\UserTest.php" tests="1" assertions="2" failures="0" errors="0" time="1.733768">
+      <testcase name="testApiLogin" class="Infostretch\GuzzleHttp\UserTest" file="C:\xampp\htdocs\duphpunit\tests\UserTest.php" line="14" assertions="2" time="1.733768"/>
+    </testsuite>
+  </testsuite>
+</testsuites>
