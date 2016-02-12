@@ -119,4 +119,9 @@ class usersController extends globalController {
         }
         $this->setTemplate("imagetemplate");
     }
+	
+	function testAction()
+	{
+		//@todo: testing git commit
+	}
 }
