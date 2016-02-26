@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit backupGlobals="false"
          backupStaticAttributes="false"
-         bootstrap="vendor/autoload.php"
+         bootstrap="phpunit/vendor/autoload.php"
          colors="true"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
@@ -10,12 +10,12 @@
          stopOnFailure="false"
          syntaxCheck="false">
     <php>
-        <env name="SELENIUM_SERVER_SCREENSHOT_FOLDER" value="C:\xampp\htdocs\duphpunit\screenshot"/>
-        <env name="SELENIUM_SERVER_SCREENSHOT_URL" value="http://localhost/duphpunit/screenshot"/>
+        <env name="SELENIUM_SERVER_SCREENSHOT_FOLDER" value="C:\xampp\htdocs\dujen\phpunit\screenshot"/>
+        <env name="SELENIUM_SERVER_SCREENSHOT_URL" value="http://localhost/dujen/phpunit/screenshot"/>
         <env name="SELENIUM_SERVER_PORT" value="4444"/>
         <env name="SELENIUM_SERVER_IP" value="127.0.0.1"/>
         <env name="BROWSER" value="*firefox"/>
-        <env name="APP_URL" value="http://localhost/duphpunit"/>
+        <env name="APP_URL" value="http://localhost/dujen/phpunit"/>
     </php>
     <testsuites>
         <testsuite name="DUjen Test Suite">

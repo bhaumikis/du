@@ -1,0 +1,38 @@
+{
+    "name": "infostretch/Phpunit",
+    "description": "Demostration for phpunit",
+    "license": "MIT",
+    "keywords": ["phpunit"],
+    "authors": [
+        {
+            "name": "Bhaumik Patel",
+            "email": "bhaumik.patel@infostretch.com"
+        }
+    ],
+    "require": {
+		
+	},
+    "require-dev": {
+        "phpunit/phpunit": "4.8.*",
+        "phpunit/phpunit-selenium": "@stable",
+		"guzzle/guzzle": "3.*",
+        "guzzlehttp/guzzle": "4.*",
+		"phploc/phploc": "*",
+		"pdepend/pdepend" : "2.2.3",
+		"phpmd/phpmd": "@stable",
+		"squizlabs/php_codesniffer": "2.*",
+		"sebastian/phpcpd": "*",
+		"theseer/phpdox": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Infostretch\\Phpunit\\": "src"
+        },
+		"classmap": [
+		    "C:\\xampp\\htdocs\\dujen\\phpunit.php"
+		],
+		"files": [
+            "C:\\xampp\\htdocs\\dujen\\phpunit.php"
+        ]
+    }
+}
