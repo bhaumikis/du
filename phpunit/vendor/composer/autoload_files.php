@@ -10,5 +10,5 @@ return array(
     'fad373d645dd668e85d44ccf3c38fbd6' => $vendorDir . '/guzzlehttp/streams/src/functions.php',
     'fe1bcd0336136e435eaf197895daf81a' => $vendorDir . '/nikic/php-parser/lib/bootstrap.php',
     '154e0d165f5fe76e8e9695179d0a7345' => $vendorDir . '/guzzlehttp/guzzle/src/functions.php',
-    '9223eb5109d2fef900bd8badea393c7c' => $baseDir . '/../dujen/phpunit.php',
+    '9223eb5109d2fef900bd8badea393c7c' => $baseDir . '/../phpunit.php',
 );
