@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         syntaxCheck="false">
+    <php>
+        <env name="SELENIUM_SERVER_SCREENSHOT_FOLDER" value="C:\xampp\htdocs\duphpunit\screenshot"/>
+        <env name="SELENIUM_SERVER_SCREENSHOT_URL" value="http://localhost/duphpunit/screenshot"/>
+        <env name="SELENIUM_SERVER_PORT" value="4444"/>
+        <env name="SELENIUM_SERVER_IP" value="127.0.0.1"/>
+        <env name="BROWSER" value="*firefox"/>
+        <env name="APP_URL" value="http://localhost/duphpunit"/>
+    </php>
+    <testsuites>
+        <testsuite name="DUjen Test Suite">
+            <directory suffix=".php">./tests</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
