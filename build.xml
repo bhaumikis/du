@@ -30,13 +30,13 @@
  <property name="phpunit" value="${basedir}/vendor/bin/phpunit"/> -->
 
  
- <property name="pdepend" value="C:\xampp\htdocs\duphpunit\vendor\bin\pdepend.bat"/>
- <property name="phpcpd"  value="C:\xampp\htdocs\duphpunit\vendor\bin\phpcpd.bat"/>
- <property name="phpcs"   value="C:\xampp\htdocs\duphpunit\vendor\bin\phpcs.bat"/>
- <property name="phpdox"  value="C:\xampp\htdocs\duphpunit\vendor\bin\phpdox.bat"/>
- <property name="phploc"  value="C:\xampp\htdocs\duphpunit\vendor\bin\phploc.bat"/>
- <property name="phpmd"   value="C:\xampp\htdocs\duphpunit\vendor\bin\phpmd.bat"/>
- <property name="phpunit" value="C:\xampp\htdocs\duphpunit\vendor\bin\phpunit.bat"/>
+ <property name="pdepend" value="${basedir}\phpunit\vendor\bin\pdepend.bat"/>
+ <property name="phpcpd"  value="${basedir}\phpunit\vendor\bin\phpcpd.bat"/>
+ <property name="phpcs"   value="${basedir}\phpunit\vendor\bin\phpcs.bat"/>
+ <property name="phpdox"  value="${basedir}\phpunit\vendor\bin\phpdox.bat"/>
+ <property name="phploc"  value="${basedir}\phpunit\vendor\bin\phploc.bat"/>
+ <property name="phpmd"   value="${basedir}\phpunit\vendor\bin\phpmd.bat"/>
+ <property name="phpunit" value="${basedir}\phpunit\vendor\bin\phpunit.bat"/>
  
  <target name="full-build"
          depends="prepare,static-analysis,phpunit,phpdox,-check-failure"
@@ -116,7 +116,9 @@
          unless="phploc.done"
          description="Measure project size using PHPLOC and print human readable output. Intended for usage on the command line.">
 	<exec executable="${phploc}" taskname="phploc">
-		<arg value="--log-csv=${basedir}/build/logs/phploc.csv" />
+		<arg value="--log-csv=${WORKSPACE}/build/logs/phploc.csv" />
+		<arg value="--exclude"/>
+		<arg value="${WORKSPACE}/lib" /
 		<arg path="${basedir}" />
     </exec>
 	<property name="phploc.done" value="true"/>
@@ -127,9 +129,10 @@
          depends="prepare"
          description="Calculate software metrics using PHP_Depend and log result in XML format. Intended for usage within a continuous integration environment.">
   <exec executable="${pdepend}" taskname="pdepend">
-   <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml" />
-   <arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
-   <arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg" />
+   <arg value="--jdepend-xml=${WORKSPACE}/build/logs/jdepend.xml" />
+   <arg value="--jdepend-chart=${WORKSPACE}/build/pdepend/dependencies.svg" />
+   <arg value="--overview-pyramid=${WORKSPACE}/build/pdepend/overview-pyramid.svg" />
+   <arg value="--ignore=lib,js" />
    <arg path="${basedir}" />
   </exec>
 
@@ -156,7 +159,7 @@
    <arg path="${basedir}" />
    <arg value="xml" />
    <arg value="--reportfile" />
-   <arg path="${basedir}/build/logs/pmd.xml" />
+   <arg path="${WORKSPACE}/build/logs/pmd.xml" />
   </exec>
 
   <property name="phpmd.done" value="true"/>
@@ -168,7 +171,7 @@
   <exec executable="${phpcs}" taskname="phpcs">
    <arg value="--standard=PSR2" />
    <arg value="--extensions=php" />
-   <arg value="--ignore=autoload.php" />
+   <arg value="--ignore=${WORKSPACE}/lib" />
    <arg path="${basedir}" />
   </exec>
 
@@ -181,8 +184,9 @@
          description="Find coding standard violations using PHP_CodeSniffer and log result in XML format. Intended for usage within a continuous integration environment.">
   <exec executable="${phpcs}" taskname="phpcs">
    <arg value="--report=checkstyle" />
-   <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
+   <arg value="--report-file=${WORKSPACE}/build/logs/checkstyle.xml" />
    <arg value="--extensions=php" />
+   <arg value="--ignore=${WORKSPACE}/lib" />
    <arg path="${basedir}" />
    <arg value="-v" />
   </exec>
@@ -206,7 +210,9 @@
          description="Find duplicate code using PHPCPD and log result in XML format. Intended for usage within a continuous integration environment.">
   <exec executable="${phpcpd}" taskname="phpcpd">
    <arg value="--log-pmd" />
-   <arg path="${basedir}/build/logs/pmd-cpd.xml" />
+   <arg path="${WORKSPACE}/build/logs/pmd-cpd.xml" />
+   <arg value="--exclude"/>
+   <arg value="${WORKSPACE}/lib/"/>
    <arg path="${basedir}" />
   </exec>
 
@@ -218,8 +224,10 @@
          depends="prepare"
          description="Run unit tests with PHPUnit">
   <exec executable="${phpunit}" resultproperty="result.phpunit" taskname="phpunit">
+	<arg value="--log-junit"/> 
+	<arg path="${WORKSPACE}\build\phpunit_report.xml"/>
    <arg value="--configuration"/>
-   <arg path="C:\xampp\htdocs\duphpunit/phpunit.xml"/>
+   <arg path="${basedir}\phpunit\phpunit.xml"/>
   </exec>
 
   <property name="phpunit.done" value="true"/>
@@ -230,8 +238,10 @@
          depends="prepare"
          description="Run unit tests with PHPUnit (without generating code coverage reports)">
   <exec executable="${phpunit}" failonerror="true" taskname="phpunit">
+   <arg value="--log-junit"/> 
+	<arg path="${WORKSPACE}\build\phpunit_report.xml"/>
    <arg value="--configuration"/>
-   <arg path="C:\xampp\htdocs\duphpunit/phpunit.xml"/>
+   <arg path="${basedir}\phpunit\phpunit.xml"/>
    <arg value="--no-coverage"/>
   </exec>
 
