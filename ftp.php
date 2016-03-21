@@ -75,16 +75,14 @@ class FtpNew {
 		return $error;
 	}
 }
-function arguments($argv)
-{
+
+// Read Arguements from the commandline
+function arguments($argv) {
   $_ARG = array();
-  foreach ($argv as $arg)
-  {
-    if (preg_match('#^-{1,2}([a-zA-Z0-9]*)=?(.*)$#', $arg, $matches))
-    {
+  foreach ($argv as $arg) {
+    if (preg_match('#^-{1,2}([a-zA-Z0-9]*)=?(.*)$#', $arg, $matches)) {
       $key = $matches[1];
-      switch ($matches[2])
-      {
+      switch ($matches[2]) {
         case '':
         case 'true':
           $arg = true;
@@ -96,24 +94,19 @@ function arguments($argv)
           $arg = $matches[2];
       }
       $_ARG[$key] = $arg;
-    }
-    else
-    {
+    }else {
       $_ARG['input'][] = $arg;
     }
   }
   return $_ARG;
 }
 
+// FTP Operation
 $argv = arguments($argv);
 //print_r($argv); die;
 $ftp = new FtpNew($argv["host"], $argv["port"]);
-
 $ftpSession = $ftp->login($argv["username"], $argv["password"]);
-
 if (!$ftpSession) die("Failed to connect.");
-
 $errorList = $ftp->send_recursive_directory($argv["source"], $argv["target"]);
 print_r($errorList);
-
 $ftp->disconnect();
