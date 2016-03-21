@@ -57,7 +57,7 @@ class FtpNew {
 	public function make_directory($remotePath) {
 		$error = "";
 		try {
-			ftp_mkdir($this->connectionID, $remotePath);
+			@ftp_mkdir($this->connectionID, $remotePath);
 		} catch (Exception $e) {
 			if ($e->getCode() == 2) $error = $e->getMessage(); 
 		}
