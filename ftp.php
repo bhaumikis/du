@@ -56,10 +56,12 @@ class FtpNew {
 		while ($file = readdir($directory)) {
 			if (in_array($file, $this->blackList)) continue;
 			if (is_dir($file)) {
+				echo "Directory: $remotePath/$file";
 				$errorList["$remotePath/$file"] = $this->make_directory("$remotePath/$file");
 				$errorList[] = $this->recurse_directory($rootPath, "$localPath/$file", "$remotePath/$file");
 				chdir($localPath);
 			} else {
+				echo "File: $remotePath/$file";
 				$errorList["$remotePath/$file"] = $this->put_file("$localPath/$file", "$remotePath/$file");
 			}
 		}
@@ -126,5 +128,6 @@ if(isset($argv["skip"])) {
 }
 
 $errorList = $ftp->send_recursive_directory($argv["source"], $argv["target"]);
-print_r($errorList);
+//print_r($errorList);
 $ftp->disconnect();
+die;
