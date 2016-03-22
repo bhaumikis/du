@@ -3,6 +3,7 @@
 
 class FtpNew {
 	private $connectionID;
+	private $skipList = array();
 	private $ftpSession = false;
 	private $blackList = array('.', '..', 'Thumbs.db');
 	public function __construct($ftpHost = "", $port = "21") {
@@ -34,6 +35,17 @@ class FtpNew {
 
 	public function send_recursive_directory($localPath, $remotePath) {
 		return $this->recurse_directory($localPath, $localPath, $remotePath);
+	}
+	
+	public function skip_directory($source, $list) {
+		$this->skipList = explode(",",$list);
+		/*
+		array_walk($this->skipList, function (&$value, $key, $source) {
+			$value = $source."\\".$value;
+		}, $source);
+		*/
+		$this->blackList = array_merge($this->blackList, $this->skipList);
+		return $this->skipList;
 	}
 
 	private function recurse_directory($rootPath, $localPath, $remotePath) {
@@ -107,6 +119,12 @@ $argv = arguments($argv);
 $ftp = new FtpNew($argv["host"], $argv["port"]);
 $ftpSession = $ftp->login($argv["username"], $argv["password"]);
 if (!$ftpSession) die("Failed to connect.");
+if(isset($argv["skip"])) { 
+	$skipList = $ftp->skip_directory($argv["source"],$argv["skip"]);
+	print "Skip Directory List..";
+	print_r($skipList);
+}
+
 $errorList = $ftp->send_recursive_directory($argv["source"], $argv["target"]);
 print_r($errorList);
 $ftp->disconnect();
